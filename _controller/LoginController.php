@@ -29,6 +29,10 @@
  				
  			}
 
+ 		}else{
+ 			if(UrlPage != "Login"){
+ 				$this->checkaccess(true,false,false,true);
+ 			}
  		}
  	}
  	public function Logout($text=false,$json=false,$redirect=false){
