@@ -23,7 +23,7 @@
 </style>
 <link href="<?=WWWROOT;?>_resources/css/signin.css" rel="stylesheet">
 </head>
-<body>
+<body www="<?=WWWROOT;?>">
 
   <form class="form-signin" onsubmit="return false;">
     <img class="d-block mx-auto mb-4" src="<?=WWWROOT;?>_resources/img/logo_onehost.png">

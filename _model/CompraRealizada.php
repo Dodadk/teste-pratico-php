@@ -9,7 +9,7 @@
 */
 class CompraRealizada extends Connection
 {
-	public $Fullname, $Dateofbirth, $NumberInvoice, $PurchaseDate, $address, $SubTotal, $table;
+	public $Fullname, $Dateofbirth, $NumberInvoice, $PurchaseDate, $address, $SubTotal, $QtsTotal, $table;
 
 	public function viewInvoice(){ 		
 		$invoice = $this->prepare("SELECT v.*, v.id vendas_code, ic.*, c.*, c.nome cliente_nome, e.*, p.*, p.id produto_id, p.nome produto_nome, fa.*, fa.nome fabricante_nome, fo.*, fo.nome fornecedor_nome
@@ -38,7 +38,8 @@ class CompraRealizada extends Connection
 			$this->NumberInvoice = "#".str_pad($k->vendas_code, 5, '0', STR_PAD_LEFT) ;	
 			$this->PurchaseDate = date("d/m/Y", strtotime($k->data_venda))." ás ".date("H:i", strtotime($k->data_venda)) ;
 			$this->address =  $end;					
-			$this->SubTotal = "R$".number_format($k->valor_total,2,",",".");	
+			$this->QtsTotal += $k->item_qts;	
+			$this->SubTotal = "R$ ".number_format($k->valor_total,2,",",".");	
 			$table .= '<tr>';
 			$table .= '<td>'."#".str_pad($k->produto_id, 5, '0', STR_PAD_LEFT).'</td>';
 			$table .= '<td>'.$k->produto_nome.'<br/>';
@@ -46,7 +47,7 @@ class CompraRealizada extends Connection
 			$table .= '</td>';
 			$table .= '<td>R$&nbsp;'.number_format($k->item_valor,2,",",".").'</td>';
 			$table .= '<td>'.$k->item_qts.'</td>';
-			$table .= '<td>'.($k->item_valor * $k->item_qts).'</td>';
+			$table .= '<td>'."R$ ".number_format(($k->item_valor * $k->item_qts),2,",",".").'</td>';
 			$table .= '</tr>';
 
 		}		

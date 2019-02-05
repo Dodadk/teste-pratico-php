@@ -40,6 +40,11 @@ class VendasController extends Vendas
 				break;
 			}
 
+		}else {
+			if(@$_SESSION['sale'] == NULL || @$_SESSION['sale']['products'] == NULL || @$_SESSION['sale']['products']['item'] == NULL){
+				header("Location: ".WWWROOT."Compras/NullItem");
+
+			}
 		}
 	}
 

@@ -11,6 +11,7 @@ class Vendas extends Connection
 {
 	public function saveInvoice(){
 		session_start();
+		$complete = false;
 		$token = md5(@$_SESSION['user']['ids'].@$_SESSION['user']['fullname'].round(date("YmdHis")).date("YmdHis"));
 		$save = $this->prepare("INSERT INTO enderecos_entregas (endereco,numero,complemento,cep,bairro,cidade,uf,token) 
 			VALUES (?,?,?,?,?,?,?,?) ");
@@ -34,11 +35,11 @@ class Vendas extends Connection
 				$save = $this->prepare("INSERT INTO itemscompras (Clientes_id, Vendas_id, Produtos_id, item_qts, item_valor, DataDeCompra) 
 					VALUES (?, (SELECT id FROM vendas WHERE token = '".$token."'), ? , ?, ?, NOW())");
 				$save3=$save->execute(array(@$_SESSION['user']['ids'], $arr['idp'], $arr['qts'], $arr['preco']));
-
+				$complete = true;
 				
 			}
 
-		}
+		}if($complete)$_SESSION['sale'] = NULL;
 		echo json_encode(array("response"=>(!$save1 || !$save2 || !$save3 ? "fail" : "success"),"token"=>$token));
 	}
 

@@ -21,7 +21,10 @@ endif;
 class ProdutosController extends Produtos
 {
 	public function __construct(){
-		parent::__construct(); 		
+		parent::__construct(); 	
+		if(@UrlAttr == "NullItem"){
+			$this->Message("Você precisa adicionar algum produto no carrinho antes de ir para próxima etapa.");
+		}	
 		if($_SERVER['REQUEST_METHOD'] === 'POST'):
 			$iSearch = filter_input(INPUT_POST, "search");
 			switch (filter_input(INPUT_POST, "setting")) {

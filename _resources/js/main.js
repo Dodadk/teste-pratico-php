@@ -1,9 +1,9 @@
 /**
 
 * @author Douglas Pierre
-* @company BaseTech TI Soluções e Tecnologias
+* @company BaseTech TI SoluÃ§Ãµes e Tecnologias
 * @mail basetechti@gmail.com
-* @packageName Classe de Manipulação de tabelas SQL
+* @packageName Classe de ManipulaÃ§Ã£o de tabelas SQL
 * @package v1.0
 */
 
@@ -12,6 +12,7 @@ var Protocolo = window.location.protocol;
 var WWW = Protocolo + "//" + HostName +"/"+ window.location.pathname;
 
 $(document).ready(function() {
+	var WWWROOT = $("body").attr("www");
 	var gSubTotal = 0;
 	function dump(obj) {
 		var out = '';
@@ -28,7 +29,7 @@ $(document).ready(function() {
 
 		var count = parseInt($("ul.product-list-added div#produts-list").attr("count"));
 		if(count>0){
-			window.location = 'Vendas';
+			window.location = WWWROOT+'Vendas';
 		}else{
 			alert("Você precisa adicionar ao menos um produtos em seu carrinho de compras!");
 		}
@@ -41,7 +42,7 @@ $(document).ready(function() {
 		.removeClass("btn-primary")
 		.html('<span class="text-middle"><i class="fas fa-sync fa-spin"></i> Autenticando...</span>');
 		$.post(
-			"_controller/LoginController.php",
+			WWWROOT+"_controller/LoginController.php",
 			{
 				user:user,
 				passwd:pass,
@@ -55,20 +56,20 @@ $(document).ready(function() {
 					.html('<span class="text-middle"><i class="fas fa-spinner fa-spin"></i> Redirecionando...</span>');
 					setTimeout(function(){					
 						window.location.reload();
-					}, 4000);
+					}, 2000);
 
 				}else{
 					$("button.btn-login").addClass("btn-primary")
 					.removeClass("btn-warning")
 					.html('Entrar');
-					$("div.msg-alert").removeClass("alert-primary").addClass("alert-danger").text("Usuario ou Senha Invalída.");					
+					$("div.msg-alert").removeClass("alert-primary").addClass("alert-danger").text("Usuario ou Senha InvalÃ­da.");					
 					$("div.msg-alert").fadeIn(500);
 				}
 			},"jSON");
 	});
 	$("body").on("click","a.btn-logout",function(){
 		$.post(
-			"_controller/LoginController.php",
+			WWWROOT+"_controller/LoginController.php",
 			{
 				setting: "Logout"
 			},function(x){
@@ -89,7 +90,7 @@ function saveAddress(){
 	var bairro = $("input[name=bairro]").val();
 	var cidade = $("input[name=cidade]").val();
 	var uf = $("input[name=uf]").val();
-	$.post("_controller/VendasController.php",
+	$.post(WWWROOT+"_controller/VendasController.php",
 			{
 				nome:nome,
 				nascimento:nascimento,
@@ -147,7 +148,7 @@ function readFieldsCustomer(){
 	}else if(cep == "" || cep == " "){
 		alert("Por favor preencha o campo CEP!");
 	}else if(endereco == "" || endereco == " "){
-		alert("Por favor preencha o campo ENDEREÇO!");
+		alert("Por favor preencha o campo ENDEREÃ‡O!");
 	}else if(numero == "" || numero == " "){
 		alert("Por favor preencha o campo NUMERO!");
 	}else if(bairro == "" || bairro == " "){
@@ -202,7 +203,7 @@ $("body").on("click","button.btn-next-page-last",function(){
 	var cidade = $("input[name=cidade]").val();
 	var uf = $("input[name=uf]").val();
 	if(readFieldsCustomer()==true){
-		$.post("_controller/VendasController.php",
+		$.post(WWWROOT+"_controller/VendasController.php",
 			{
 				nome:nome,
 				nascimento:nascimento,
@@ -218,7 +219,7 @@ $("body").on("click","button.btn-next-page-last",function(){
 				if(x.response == "fail"){
 					alert("Desculpe!: Houve uma falha ao realizar sua compra, tente novamente!");
 				}else{
-					window.location = "CompraRealizada/"+x.token;
+					window.location = WWWROOT+"CompraRealizada/"+x.token;
 				}
 			},"jSON");
 	}
@@ -230,7 +231,7 @@ $("body").on("click","button.btn-next-page-last",function(){
 var ProductObject = null;
 
 function readProducts(){
-	$.post("_controller/ProdutosController.php",
+	$.post(WWWROOT+"_controller/ProdutosController.php",
 		{setting:"readSessionProducts"},function(x){	
 			xs = x.Items.item;	
 			var count = x.Items.countItems;
@@ -302,7 +303,7 @@ $("body").on("click", "ul.product-list-added div li.li-product-id",function(){
 	var id = $(this).attr("position");
 	ProductObject = $(this);		
 	if(confirm('Deseja Realmente Apagar o Item: ' +name) == true){
-		$.post("_controller/ProdutosController.php",
+		$.post(WWWROOT+"_controller/ProdutosController.php",
 			{id: id, setting:"deleteProducts"},
 			function(result){	
 				readProducts();	
@@ -318,7 +319,7 @@ $("body").on("mouseenter mouseleave", "ul.product-list-added div#produts-list li
 });
 $("body").on("input", "input[name=search]",function(){
 	var input = $(this).val();
-	$.post("_controller/ProdutosController.php",
+	$.post(WWWROOT+"_controller/ProdutosController.php",
 		{search: input, setting:"Search"},
 		function(result){			
 			$("div.products-list-result").html(result);
@@ -356,8 +357,7 @@ $("body").on("click", "a.product-add-list", function(){
 	var provider = $(this).closest("div.list-product").find("span.product-provider").text();
 	var subtotal = parseFloat($("li.product-add-subtotal").find("strong").text().substr(2).replace(".","").replace(",","."));
 	var newSubTotal = (subtotal + (price * qts));
-	$.post(
-		"_controller/ProdutosController.php",
+	$.post(WWWROOT+"_controller/ProdutosController.php",
 		{
 			id:id,
 			code:code,

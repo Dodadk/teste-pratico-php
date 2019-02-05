@@ -9,7 +9,7 @@
 */
 $PageView = filter_input(INPUT_GET, "view");	
 $View = explode("/", $PageView);
-define("WWWROOT",str_replace($View[0],"","http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"));
+define("WWWROOT",str_replace((@$View[1]!=""?"/".@$View[1] : ""),"",str_replace($View[0],"","http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]")));
 define("UrlPage",@$View[0]);
 define("UrlAttr",@$View[1]);
 class Constructor 
@@ -20,6 +20,7 @@ class Constructor
 	private $ControllerFolder = "_controller/";
 	private $ModelFolder = "_model/";
 	private $ViewFolder = "_view/";
+	public $HomePage = "Compras";
 	public $Model, $Controller, $View, $Page, $Attribute;
 	
 	public function __construct()
@@ -37,7 +38,7 @@ class Constructor
 		$this->Attribute = @$View[1];
 		if(empty($this->Page)){
 			$index = str_replace("/", DIRECTORY_SEPARATOR, 
-				$this->AppDir.DIRECTORY_SEPARATOR.$this->ViewFolder."VendasView.php");
+				$this->AppDir.DIRECTORY_SEPARATOR.$this->ViewFolder.$this->HomePage."View.php");
 			if(file_exists($index)){
 				include_once($index);
 			}else{
@@ -50,6 +51,9 @@ class Constructor
 			if($user->checkaccess(true,false) == true){
 				$this->__autoload($this->Page);
 				$this->Model = new $this->Page();
+				if($this->Page == "Login"){
+					header("Location: ".WWWROOT.$this->HomePage);
+				}
 			}else{
 			$View = str_replace("/", DIRECTORY_SEPARATOR, $this->AppDir.DIRECTORY_SEPARATOR.$this->ViewFolder."LoginView.php");
 				if(file_exists($View)):

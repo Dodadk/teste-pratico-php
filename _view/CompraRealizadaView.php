@@ -13,10 +13,10 @@ $sale->viewInvoice();
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <title>Vendas - OneHost</title>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="_resources/js/main.js"></script>
+  <script type="text/javascript" src="<?=WWWROOT;?>_resources/js/main.js"></script>
 </head>
 <body>
- <body class="bg-light">
+ <body class="bg-light" www="<?=WWWROOT;?>">
    <main role="main" class="container">
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm"> 
       <img class="mr-3" src="<?=str_replace($this->Attribute,"",WWWROOT);?>_resources/img/logo_onehost.png" alt=""  height="48">
@@ -43,6 +43,8 @@ $sale->viewInvoice();
           </div>
           <div class="col col-sm-4"><span style="font-size: 14px;">
             <strong class="text-gray-dark">Numero do Pedido: </strong><?=$sale->NumberInvoice;?><br/>
+            <strong class="text-gray-dark">Total de Produtos: </strong><?=$sale->QtsTotal.($sale->QtsTotal>1?" Items": "Item");?><br/>
+            <strong class="text-gray-dark">Valor Total NF: </strong><?=$sale->SubTotal;?><br/>
             <strong class="text-gray-dark">Data de Compra: </strong><?=$sale->PurchaseDate;?>
           </span>
         </div>

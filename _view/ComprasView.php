@@ -12,7 +12,7 @@ $arr = @$_SESSION['sale']['products']['item'];
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	<title>Vendas - OneHost</title>
+	<title>Compras - OneHost</title>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="<?=WWWROOT;?>_resources/js/main.js"></script>
 	<style type="text/css">
@@ -28,11 +28,11 @@ $arr = @$_SESSION['sale']['products']['item'];
 </style>
 </head>
 <body>
-	<body class="bg-light">
+	<body class="bg-light" www="<?=WWWROOT;?>">
 		<div class="container" style="max-width: 80%;">
       <div class="d-flex mx-auto">
       <span  class="mx-auto" style="margin-top: 5px;">
-        <a href="Compras" class="btn btn-primary text-white">Produtos</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Vendas" class="btn btn-primary text-white">Vendas</a>
+        <a href="<?=WWWROOT;?>Compras" class="btn btn-primary text-white">Produtos</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?=WWWROOT;?>Vendas" class="btn btn-primary text-white">Vendas</a>
       </span>
       <span class="mx-auto"  style="margin-top: 5px;"><?=$user->Logout(true);?></span>
     </div>

@@ -12,19 +12,19 @@ $arr = @$_SESSION['sale']['products']['item'];
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <title>Vendas - OneHost</title>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="_resources/js/main.js"></script>
+  <script type="text/javascript" src="<?=WWWROOT;?>_resources/js/main.js"></script>
   </head>
   <body>
-   <body class="bg-light">
+   <body class="bg-light" www="<?=WWWROOT;?>">
     <div class="container" style="max-width: 80%;">
       <div class="d-flex mx-auto">
       <span  class="mx-auto" style="margin-top: 5px;">
-        <a href="Compras" class="btn btn-primary text-white">Produtos</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Vendas" class="btn btn-primary text-white">Vendas</a>
+        <a href="<?=WWWROOT;?>Compras" class="btn btn-primary text-white">Produtos</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?=WWWROOT;?>Vendas" class="btn btn-primary text-white">Vendas</a>
       </span>
       <span class="mx-auto"  style="margin-top: 5px;"><?=$user->Logout(true);?></span>
     </div>
   <div class="py-5 text-center">
-    <img class="d-block mx-auto mb-4" src="/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <img class="d-block mx-auto mb-4" src="<?=WWWROOT;?>_resources/img/logo_onehost.png">
     <h2>Faça sua compra</h2>
     <p class="lead">Com a onehost você consegue comprar com facilidade e segurança, pois a onehost trabalha diariamente aperfeiçoando seu sistema com sua equipe para que possamos te fornecer o melhor em conforto e diversidade.</p>
   </div>
@@ -77,7 +77,7 @@ $arr = @$_SESSION['sale']['products']['item'];
             </li>
           </ul>     
           <button class="btn-next-page-last btn btn-lg btn-success btn-block text-white" disabled>Finalizar Compra <i class="fas fa-shopping-cart"></i></button> 
-          <a href="Compras" class="btn btn-lg btn-primary btn-block text-white"><i class="fas fa-arrow-circle-left"></i> Voltar Etapa Anterior
+          <a href="<?=WWWROOT;?>Compras" class="btn btn-lg btn-primary btn-block text-white"><i class="fas fa-arrow-circle-left"></i> Voltar Etapa Anterior
           </a> 
         </div>
     <div class="col-md-8 order-md-1">

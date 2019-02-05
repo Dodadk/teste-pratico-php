@@ -43,7 +43,7 @@
  			session_start();
  			session_destroy();
  			if($redirect==true){
- 				header("Location: Login");
+ 				header("Location: ".WWWROOT."Login");
  			}elseif($json==true){
  				return json_encode(array("response"=> "unlogged"));
  			}
@@ -65,10 +65,8 @@
  			$_SESSION['user']['dateofbirth'] = $this->credentialsDateofbirth; 			
  		}
  		if($redirect == true){
- 			if($response){
- 				header("Location: Vendas");
- 			}else{
- 				header("Location: Login");
+ 			if(!$response){
+ 				header("Location: ".WWWROOT."Login");
  			}
  		}elseif($json == true){
  			return json_encode(array("response"=>($response == true? "authorized" : "unauthorized")));
