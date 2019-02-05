@@ -62,7 +62,7 @@ $(document).ready(function() {
 					$("button.btn-login").addClass("btn-primary")
 					.removeClass("btn-warning")
 					.html('Entrar');
-					$("div.msg-alert").removeClass("alert-primary").addClass("alert-danger").text("Usuario ou Senha InvalÃ­da.");					
+					$("div.msg-alert").removeClass("alert-primary").addClass("alert-danger").text("Usuario ou Senha Invalída.");					
 					$("div.msg-alert").fadeIn(500);
 				}
 			},"jSON");
@@ -148,7 +148,7 @@ function readFieldsCustomer(){
 	}else if(cep == "" || cep == " "){
 		alert("Por favor preencha o campo CEP!");
 	}else if(endereco == "" || endereco == " "){
-		alert("Por favor preencha o campo ENDEREÃ‡O!");
+		alert("Por favor preencha o campo ENDEREÇO!");
 	}else if(numero == "" || numero == " "){
 		alert("Por favor preencha o campo NUMERO!");
 	}else if(bairro == "" || bairro == " "){

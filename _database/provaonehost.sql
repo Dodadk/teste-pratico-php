@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.7.21)
-# Date: 2019-01-29 16:00:52
+# Date: 2019-02-04 22:33:46
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -39,13 +39,13 @@ CREATE TABLE `enderecos_entregas` (
   `uf` varchar(255) NOT NULL DEFAULT '',
   `token` varchar(40) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "enderecos_entregas"
 #
 
-INSERT INTO `enderecos_entregas` VALUES (00000000031,'Rua da Igreja','74','','25042320','Vila Santo Antônio','Duque de Caxias','RJ','1755f36cd2b196da719223496cd64966');
+INSERT INTO `enderecos_entregas` VALUES (00000000031,'Rua da Igreja','74','','25042320','Vila Santo Antônio','Duque de Caxias','RJ','1755f36cd2b196da719223496cd64966'),(00000000032,'Rua Delgado de Carvalho','74','','25040240','Vila Santo Antônio','Duque de Caxias','RJ','037f7f0dfe67275b2891828af058bcd7'),(00000000033,'Rua da Igreja','225','','25042320','Vila Santo Antônio','Duque de Caxias','RJ','2e6cdfe84a0322066976f0754a99d4d5'),(00000000034,'Rua Delgado de Carvalho','1245','','25040240','Vila Santo Antônio','Duque de Caxias','RJ','4cd70e7759db81b59a98555fd2d9c391'),(00000000035,'Rua Kemal Pacha','741','','25040220','Vila Santo Antônio','Duque de Caxias','RJ','7fec7e16438c1b8e658d0ae85f857545'),(00000000036,'Rua Kemal Pacha','13554','','25040220','Vila Santo Antônio','Duque de Caxias','RJ','6c9d5f00a6f26252d03ae3a04453e141'),(00000000037,'Rua Kemal Pacha','11235','','25040220','Vila Santo Antônio','Duque de Caxias','RJ','c4f24cafb6aef6cd022869e7b30d6d0a'),(00000000038,'Rua da Igreja','74','lt20 qd 48','25042320','Vila Santo Antônio','Duque de Caxias','RJ','ca02a1daf59955ec9efa323679067e2d');
 
 #
 # Structure for table "fabricantes"
@@ -118,12 +118,11 @@ INSERT INTO `produtos` VALUES (1,'https://www.asus.com/websites/global/products/
 DROP TABLE IF EXISTS `itemscompras`;
 CREATE TABLE `itemscompras` (
   `Clientes_id` int(11) NOT NULL,
-  `Vendas_id` varchar(40) DEFAULT NULL,
+  `Vendas_id` int(11) NOT NULL DEFAULT '0',
   `Produtos_id` int(11) NOT NULL,
   `item_qts` int(11) DEFAULT NULL,
   `item_valor` decimal(10,2) NOT NULL,
   `DataDeCompra` datetime DEFAULT NULL,
-  PRIMARY KEY (`Produtos_id`,`Clientes_id`),
   KEY `fk_Produtos_has_Clientes_Clientes1_idx` (`Clientes_id`),
   KEY `fk_Produtos_has_Clientes_Produtos_idx` (`Produtos_id`),
   CONSTRAINT `fk_Produtos_has_Clientes_Clientes1` FOREIGN KEY (`Clientes_id`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -134,7 +133,7 @@ CREATE TABLE `itemscompras` (
 # Data for table "itemscompras"
 #
 
-INSERT INTO `itemscompras` VALUES (1,'29',1,1,495.15,'2019-01-29 05:34:36'),(1,'29',6,16,225.55,'2019-01-29 05:34:36'),(1,'29',9,6,356.99,'2019-01-29 05:34:36'),(1,'29',10,1,389.00,'2019-01-29 05:34:36');
+INSERT INTO `itemscompras` VALUES (1,29,1,1,495.15,'2019-01-29 05:34:36'),(1,29,6,16,225.55,'2019-01-29 05:34:36'),(1,29,9,6,356.99,'2019-01-29 05:34:36'),(1,29,10,1,389.00,'2019-01-29 05:34:36'),(1,30,9,4,356.99,'2019-02-04 17:37:39'),(1,30,1,7,495.15,'2019-02-04 17:37:39'),(1,30,10,100,389.00,'2019-02-04 17:37:39'),(1,31,1,7,495.15,'2019-02-04 17:43:45'),(1,32,10,1,389.00,'2019-02-04 19:31:25'),(1,33,6,5,225.55,'2019-02-04 19:32:10'),(1,34,1,2,495.15,'2019-02-04 19:34:09'),(1,34,9,4,356.99,'2019-02-04 19:34:09'),(1,34,6,1,225.55,'2019-02-04 19:34:09'),(1,34,8,6,1542.99,'2019-02-04 19:34:09'),(1,34,7,1,998.69,'2019-02-04 19:34:09'),(1,34,2,1,798.55,'2019-02-04 19:34:09'),(1,34,3,25,688.99,'2019-02-04 19:34:09'),(1,35,6,5,225.55,'2019-02-04 22:13:27'),(1,35,5,11,289.99,'2019-02-04 22:13:27'),(1,35,1,20,495.15,'2019-02-04 22:13:27'),(1,35,8,20,1542.99,'2019-02-04 22:13:27'),(1,35,4,1,885.99,'2019-02-04 22:13:27'),(1,35,2,1,798.55,'2019-02-04 22:13:27'),(1,35,3,1,688.99,'2019-02-04 22:13:27'),(1,35,10,1,389.00,'2019-02-04 22:13:27'),(1,35,9,5,356.99,'2019-02-04 22:13:27'),(1,36,9,6,356.99,'2019-02-04 22:26:08'),(1,36,1,12,495.15,'2019-02-04 22:26:08');
 
 #
 # Structure for table "vendas"
@@ -150,10 +149,10 @@ CREATE TABLE `vendas` (
   PRIMARY KEY (`id`),
   KEY `fk_Vendas_Enderecos_Entregas1_idx` (`Enderecos_Entregas_id`),
   CONSTRAINT `fk_Vendas_Enderecos_Entrega1` FOREIGN KEY (`Enderecos_Entregas_id`) REFERENCES `enderecos_entregas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "vendas"
 #
 
-INSERT INTO `vendas` VALUES (29,0000000031,6634.89,'2019-01-29 05:34:36','1755f36cd2b196da719223496cd64966');
+INSERT INTO `vendas` VALUES (29,0000000031,6634.89,'2019-01-29 05:34:36','1755f36cd2b196da719223496cd64966'),(30,0000000032,43794.01,'2019-02-04 17:37:39','037f7f0dfe67275b2891828af058bcd7'),(31,0000000033,180276.15,'2019-02-04 17:43:45','2e6cdfe84a0322066976f0754a99d4d5'),(32,0000000034,389.00,'2019-02-04 19:31:25','4cd70e7759db81b59a98555fd2d9c391'),(33,0000000035,36712.99,'2019-02-04 19:32:10','7fec7e16438c1b8e658d0ae85f857545'),(34,0000000036,30923.74,'2019-02-04 19:34:09','6c9d5f00a6f26252d03ae3a04453e141'),(35,0000000037,49627.92,'2019-02-04 22:13:27','c4f24cafb6aef6cd022869e7b30d6d0a'),(36,0000000038,8083.74,'2019-02-04 22:26:08','ca02a1daf59955ec9efa323679067e2d');
